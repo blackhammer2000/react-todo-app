@@ -1,7 +1,7 @@
 import React from "react";
 import "./css/bootstrap.min.css";
 
-const Form = ({ input, setInput, todos, setTodos }) => {
+const Form = ({ input, setInput, todos, setTodos, editedTask }) => {
   const formSubmition = (e) => {
     e.preventDefault();
     setTodos([...todos, { id: Date.now(), body: input, completed: false }]);
@@ -30,7 +30,7 @@ const Form = ({ input, setInput, todos, setTodos }) => {
             className="btn btn-outline-primary"
             onClick={(e) => formSubmition(e)}
           >
-            Add Task
+            {editedTask ? "OK" : "Add Task"}
           </button>
         </div>
       </form>

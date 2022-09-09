@@ -7,7 +7,22 @@ import { useFetchTodos } from "./hooks/fetchTodos";
 import Loader from "./components/Loader";
 
 function App() {
-  const { input, todos, error, loading, setTodos, setInput } = useFetchTodos();
+  const {
+    input,
+    todos,
+    error,
+    loading,
+    editedTask,
+    setTodos,
+    setInput,
+    setEditTask,
+  } = useFetchTodos();
+
+  const editTask = (id) => {
+    const selectedTask = todos.find((todo) => todo.id === id);
+    setInput(selectedTask.body);
+    setEditTask(input);
+  };
 
   return (
     <div className="App container border mt-2">
@@ -25,8 +40,10 @@ function App() {
             setInput={setInput}
             todos={todos}
             setTodos={setTodos}
+            setEditTask={setEditTask}
+            editedTask={editedTask}
           />
-          <Todolist todos={todos} setTodos={setTodos} />
+          <Todolist todos={todos} setTodos={setTodos} editTask={editTask} />
         </>
       )}
     </div>
