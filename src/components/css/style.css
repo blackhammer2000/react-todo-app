@@ -1,0 +1,81 @@
+:root {
+  --normal: 1;
+}
+
+/* body {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  background-color: black;
+  color: white;
+  overflow: hidden;
+} */
+
+.main {
+  display: grid;
+  place-items: center;
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+.spinner {
+  border-radius: 50%;
+  border-width: 10px;
+  position: absolute;
+  animation: spin infinite;
+}
+
+.large {
+  border-top: solid red;
+  width: 50%;
+  height: 50%;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0.1s;
+  transition: animation 1.5s;
+}
+.mid {
+  border-left: solid orange;
+  width: 35%;
+  height: 35%;
+  animation-duration: 1.2s;
+  animation-timing-function: ease-in-out;
+  transition: animation 1.2s;
+}
+.small {
+  border-right: solid green;
+  width: 15%;
+  height: 15%;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  transition: animation 1s;
+}
+
+.loading-text {
+  position: absolute;
+  bottom: -20px;
+  transform: translateX(-50%) scale(1);
+  animation: blink 1.2s infinite ease-in-out alternate;
+  transition: animation 1.5s;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: var(--normal);
+    transform: scale(calc(var(--normal) - 0.2));
+  }
+}

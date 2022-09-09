@@ -1,0 +1,8 @@
+.task-body {
+  border-radius: 5px;
+}
+
+.overflow {
+  overflow-y: scroll;
+  height: 350px;
+}
