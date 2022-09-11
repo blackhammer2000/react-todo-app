@@ -5,10 +5,7 @@ import "./css/todolist.css";
 
 const Task = ({ todo, index, deleteTask, setCompleteTaskStatus, editTask }) => {
   return (
-    <li
-      className="list-unstyled d-flex justify-content-around border align-items-center mt-2 task-body"
-      key={todo.id}
-    >
+    <li className="list-unstyled d-flex justify-content-around border align-items-center mt-2 task-body">
       <div className="w-50 font-italic font-weight-lighter p-2">
         {todo.completed ? (
           <h5 className="text-white-50">

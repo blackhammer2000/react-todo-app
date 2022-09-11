@@ -6,13 +6,14 @@ export function useFetchTodos() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editedTask, setEditTask] = useState(null);
+  const [buttonText, setButtonText] = useState("Add Task");
 
   useEffect(() => {
     try {
       setTimeout(() => {
         const todos = JSON.parse(localStorage.getItem("react-todolist-items"));
-        if (todos) {
-          setTodos(todos);
+        if (todos || todos === null) {
+          todos ? setTodos(todos) : setTodos([]);
           setLoading(false);
           setError(null);
         }
@@ -22,7 +23,7 @@ export function useFetchTodos() {
       setLoading(false);
       setTodos(null);
     }
-  }, [todos, editedTask]);
+  }, []);
 
   return {
     input,
@@ -30,8 +31,10 @@ export function useFetchTodos() {
     error,
     loading,
     editedTask,
+    buttonText,
     setTodos,
     setInput,
     setEditTask,
+    setButtonText,
   };
 }

@@ -1,13 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./css/bootstrap.min.css";
 
-const Form = ({ input, setInput, todos, setTodos, editedTask }) => {
+const Form = ({
+  input,
+  setInput,
+  todos,
+  setTodos,
+  editedTask,
+  setEditTask,
+  buttonText,
+  setButtonText,
+}) => {
+  useEffect(() => {
+    localStorage.setItem("react-todolist-items", JSON.stringify(todos));
+  }, [todos]);
+
   const formSubmition = (e) => {
     e.preventDefault();
-    setTodos([...todos, { id: Date.now(), body: input, completed: false }]);
-    setInput("");
-
-    localStorage.setItem("react-todolist-items", JSON.stringify(todos));
+    if (input) {
+      if (e.target.innerText === "Add Task") {
+        setTodos([
+          ...todos,
+          { id: crypto.randomUUID(), body: input, completed: false },
+        ]);
+      } else {
+        setTodos(
+          todos.map((todo) => {
+            if (todo.id === editedTask.id) {
+              return { ...editedTask, body: input };
+            } else {
+              return todo;
+            }
+          })
+        );
+        setEditTask(null);
+      }
+      setButtonText("Add Task");
+      setInput("");
+      // localStorage.setItem("react-todolist-items", JSON.stringify(todos));
+    }
   };
 
   return (
@@ -30,7 +61,7 @@ const Form = ({ input, setInput, todos, setTodos, editedTask }) => {
             className="btn btn-outline-primary"
             onClick={(e) => formSubmition(e)}
           >
-            {editedTask ? "OK" : "Add Task"}
+            {buttonText}
           </button>
         </div>
       </form>

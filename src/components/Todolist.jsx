@@ -12,9 +12,15 @@ const Todolist = ({ todos, setTodos, editTask }) => {
   };
 
   const setCompleteTaskStatus = (id) => {
-    const selectedTask = todos.find((todo) => todo.id === id);
-    selectedTask.completed = !selectedTask.completed;
-    setTodos(todos);
+    setTodos(
+      todos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, completed: !todo.completed };
+        } else {
+          return todo;
+        }
+      })
+    );
 
     localStorage.setItem("react-todolist-items", JSON.stringify(todos));
   };
@@ -28,6 +34,7 @@ const Todolist = ({ todos, setTodos, editTask }) => {
             deleteTask={deleteTask}
             setCompleteTaskStatus={setCompleteTaskStatus}
             editTask={editTask}
+            key={todo.id}
           />
         );
       })}

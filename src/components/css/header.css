@@ -1,0 +1,61 @@
+.heading {
+  display: grid;
+  place-items: center;
+  width: 80%;
+  height: 10vh;
+  text-align: center;
+  position: relative;
+}
+
+.header {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.one {
+  z-index: 1;
+  color: #e91e63;
+  animation: glitch 0.3s infinite alternate;
+}
+
+.two {
+  z-index: 3;
+}
+
+.three {
+  z-index: 2;
+  color: #2196f3;
+  animation: glitch 0.3s infinite alternate reverse;
+}
+
+@keyframes glitch {
+  0%,
+  100% {
+    top: 45%;
+    left: 50%;
+  }
+
+  20% {
+    top: 42%;
+    left: 49.9%;
+  }
+
+  40% {
+    top: 47%;
+    left: 50.1%;
+  }
+
+  60% {
+    top: 42%;
+    left: 50.1%;
+  }
+
+  80% {
+    top: 47%;
+    left: 49.9%;
+  }
+}

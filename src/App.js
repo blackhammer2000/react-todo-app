@@ -13,26 +13,32 @@ function App() {
     error,
     loading,
     editedTask,
+    buttonText,
     setTodos,
     setInput,
     setEditTask,
+    setButtonText,
   } = useFetchTodos();
 
   const editTask = (id) => {
     const selectedTask = todos.find((todo) => todo.id === id);
     setInput(selectedTask.body);
-    setEditTask(input);
+    setEditTask(selectedTask);
+    setButtonText("OK");
   };
 
   return (
-    <div className="App container border mt-2">
+    <div className="App container  mt-2">
       {loading && (
-        <div className="loading d-flex justify-content-center align-items-center container border font-weight-bold">
+        <div className="loading d-flex justify-content-center align-items-center container font-weight-bold">
           <Loader />
         </div>
       )}
       {error && <div className="container font-weight-bold">{error}</div>}
-      {todos && (
+      {!loading && !todos && !error && (
+        <div className="container font-weight-bold">No data found...</div>
+      )}
+      {(todos || !todos) && !loading && (
         <>
           <Header />
           <Form
@@ -40,10 +46,14 @@ function App() {
             setInput={setInput}
             todos={todos}
             setTodos={setTodos}
-            setEditTask={setEditTask}
             editedTask={editedTask}
+            setEditTask={setEditTask}
+            buttonText={buttonText}
+            setButtonText={setButtonText}
           />
-          <Todolist todos={todos} setTodos={setTodos} editTask={editTask} />
+          {todos && (
+            <Todolist todos={todos} setTodos={setTodos} editTask={editTask} />
+          )}
         </>
       )}
     </div>
